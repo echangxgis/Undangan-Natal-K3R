@@ -387,6 +387,13 @@ h2 {
   text-shadow: 0 0 22px rgba(201, 162, 39, .35);
 }
 
+.cover-theme .cover-theme-label {
+  margin: 0 0 .45em;
+  text-transform: none;
+  letter-spacing: .12em;
+  text-indent: .12em;
+}
+
 .cover-theme span {
   display: block;
   margin-top: .55em;
