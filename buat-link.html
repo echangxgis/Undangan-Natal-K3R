@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#25060A">
+<title>Buat Link Undangan per Tamu · K3R</title>
+<style>
+  :root { --wine: #4A0D12; --gold: #C9A227; --cream: #FBF4E7; --ink: #2B1416; --muted: #6F5450; }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font: 16px/1.6 system-ui, -apple-system, "Segoe UI", sans-serif;
+    color: var(--ink);
+    background: var(--cream);
+  }
+  header { padding: 22px 18px; color: #FFF4D6; background: linear-gradient(180deg, #7A1519, #25060A); }
+  header h1 { margin: 0; font-size: 1.25rem; }
+  header p { margin: 4px 0 0; font-size: .88rem; opacity: .8; }
+  main { max-width: 720px; margin: 0 auto; padding: 18px; }
+  label { display: block; margin: 18px 0 6px; font-weight: 600; font-size: .92rem; }
+  .hint { margin: 4px 0 0; font-size: .8rem; color: var(--muted); }
+  input, textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #D9C7AE;
+    border-radius: 10px;
+    font: inherit;
+    background: #fff;
+  }
+  textarea { min-height: 170px; resize: vertical; }
+  .row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+  button {
+    padding: 12px 16px;
+    border: 0;
+    border-radius: 999px;
+    font: inherit;
+    font-weight: 600;
+    font-size: .9rem;
+    cursor: pointer;
+    color: #fff;
+    background: var(--wine);
+  }
+  button.alt { color: var(--wine); background: transparent; border: 1px solid var(--wine); }
+  button:disabled { opacity: .45; cursor: not-allowed; }
+  #status { min-height: 1.5em; margin: 12px 0 0; font-size: .88rem; color: var(--muted); }
+  ol { margin: 18px 0 0; padding: 0; list-style: none; display: grid; gap: 10px; }
+  li { padding: 14px; border: 1px solid #E5D6C0; border-radius: 12px; background: #fff; }
+  li strong { display: block; font-size: 1rem; }
+  li code {
+    display: block;
+    margin: 6px 0 10px;
+    font-size: .78rem;
+    color: var(--muted);
+    word-break: break-all;
+  }
+  li .row { margin-top: 0; }
+  li button { padding: 8px 12px; font-size: .8rem; }
+  li a.wa {
+    display: inline-flex;
+    align-items: center;
+    padding: 8px 12px;
+    border-radius: 999px;
+    font-size: .8rem;
+    font-weight: 600;
+    color: #fff;
+    background: #1F8A4C;
+    text-decoration: none;
+  }
+</style>
+</head>
+<body>
+<header>
+  <h1>Buat Link Undangan per Tamu</h1>
+  <p>Ibadah Menyambut Natal K3R Raanan Baru 2026</p>
+</header>
+
+<main>
+  <label for="baseUrl">Alamat undangan</label>
+  <input id="baseUrl" type="url" inputmode="url" autocomplete="off" placeholder="https://natal-k3r-2026.netlify.app/">
+  <p class="hint">Isi dengan alamat undangan setelah diunggah. Terisi otomatis kalau halaman ini dibuka dari alamat yang sama.</p>
+
+  <label for="names">Daftar nama tamu (satu nama per baris)</label>
+  <textarea id="names" placeholder="Keluarga Lumenta&#10;Keluarga Sondakh&#10;Bpk. Alfred Monim&#10;Ibu Grace Wenas"></textarea>
+  <p class="hint">Bisa langsung tempel dari Excel atau Google Sheets (satu kolom nama). Daftar disimpan di HP/laptop ini saja.</p>
+
+  <div class="row">
+    <button id="btnMake" type="button">Buat Link</button>
+    <button id="btnCopyAll" class="alt" type="button" disabled>Salin Semua</button>
+    <button id="btnCsv" class="alt" type="button" disabled>Unduh CSV</button>
+  </div>
+  <p id="status" role="status"></p>
+
+  <ol id="out"></ol>
+</main>
+
+<script>
+(function () {
+  'use strict';
+
+  var KEY = 'k3r-natal-2026-daftar-tamu';
+  var base = document.getElementById('baseUrl');
+  var names = document.getElementById('names');
+  var out = document.getElementById('out');
+  var status = document.getElementById('status');
+  var btnCopyAll = document.getElementById('btnCopyAll');
+  var btnCsv = document.getElementById('btnCsv');
+  var rows = [];
+
+  var saved = {};
+  try { saved = JSON.parse(localStorage.getItem(KEY) || '{}') || {}; } catch (err) {}
+  base.value = saved.base || (location.protocol.indexOf('http') === 0
+    ? location.href.replace(/buat-link\.html.*$/, '')
+    : '');
+  names.value = saved.names || '';
+
+  function linkFor(name) {
+    var url = new URL(base.value.trim());
+    if (!/^https?:$/.test(url.protocol)) throw new Error('Alamat harus HTTP atau HTTPS');
+    url.search = '';
+    url.hash = '';
+    url.searchParams.set('to', name);
+    return url.toString();
+  }
+
+  function message(name, link) {
+    return 'Shalom, ' + name + '.\n\n'
+      + 'Dengan sukacita kami mengundang ' + name + ' dalam Ibadah Menyambut Natal '
+      + 'Kerukunan Keluarga Kawanua (K3R) Raanan Baru.\n\n'
+      + 'Tema: Terang di Tengah Kegelapan (Yohanes 1:5)\n'
+      + 'Rabu, 2 Desember 2026, pukul 17.00 WIT - selesai\n'
+      + 'Aula "Jantje Kemur", SKKK Sentani\n\n'
+      + 'Undangan lengkap:\n' + link + '\n\n'
+      + 'Tuhan Yesus memberkati.';
+  }
+
+  async function copy(text) {
+    try {
+      await navigator.clipboard.writeText(text);
+      return true;
+    } catch (err) {
+      var area = document.createElement('textarea');
+      area.value = text;
+      document.body.appendChild(area);
+      area.select();
+      var ok = document.execCommand('copy');
+      area.remove();
+      return ok;
+    }
+  }
+
+  function render() {
+    out.replaceChildren();
+    rows.forEach(function (row) {
+      var li = document.createElement('li');
+      var strong = document.createElement('strong');
+      var code = document.createElement('code');
+      var actions = document.createElement('div');
+      var copyBtn = document.createElement('button');
+      var wa = document.createElement('a');
+
+      strong.textContent = row.name;
+      code.textContent = row.link;
+      actions.className = 'row';
+
+      copyBtn.type = 'button';
+      copyBtn.textContent = 'Salin pesan';
+      copyBtn.addEventListener('click', async function () {
+        var ok = await copy(row.message);
+        copyBtn.textContent = ok ? 'Tersalin' : 'Gagal menyalin';
+      });
+
+      wa.className = 'wa';
+      wa.href = 'https://wa.me/?text=' + encodeURIComponent(row.message);
+      wa.target = '_blank';
+      wa.rel = 'noopener';
+      wa.textContent = 'Kirim WhatsApp';
+
+      actions.append(copyBtn, wa);
+      li.append(strong, code, actions);
+      out.appendChild(li);
+    });
+    btnCopyAll.disabled = btnCsv.disabled = !rows.length;
+  }
+
+  document.getElementById('btnMake').addEventListener('click', function () {
+    var list = names.value.split(/\r?\n/)
+      .map(function (n) { return n.replace(/\s+/g, ' ').trim(); })
+      .filter(Boolean);
+    list = list.filter(function (n, i) { return list.indexOf(n) === i; });
+
+    if (!list.length) {
+      status.textContent = 'Isi minimal satu nama tamu.';
+      return;
+    }
+    try {
+      linkFor('cek');
+    } catch (err) {
+      status.textContent = 'Alamat undangan belum benar. Contoh: https://natal-k3r-2026.netlify.app/';
+      base.focus();
+      return;
+    }
+
+    rows = list.map(function (name) {
+      var link = linkFor(name);
+      return { name: name, link: link, message: message(name, link) };
+    });
+
+    try {
+      localStorage.setItem(KEY, JSON.stringify({ base: base.value.trim(), names: names.value }));
+    } catch (err) {}
+    status.textContent = rows.length + ' link dibuat.';
+    render();
+  });
+
+  btnCopyAll.addEventListener('click', async function () {
+    var text = rows.map(function (r) { return r.name + '\n' + r.link; }).join('\n\n');
+    status.textContent = (await copy(text)) ? 'Semua nama dan link tersalin.' : 'Gagal menyalin.';
+  });
+
+  btnCsv.addEventListener('click', function () {
+    function cell(v) { return '"' + String(v).replace(/"/g, '""') + '"'; }
+    var csv = '\ufeffNama;Link\r\n' + rows.map(function (r) {
+      return cell(r.name) + ';' + cell(r.link);
+    }).join('\r\n');
+    var url = URL.createObjectURL(new Blob([csv], { type: 'text/csv;charset=utf-8' }));
+    var a = document.createElement('a');
+    a.href = url;
+    a.download = 'link-undangan-k3r.csv';
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    setTimeout(function () { URL.revokeObjectURL(url); }, 4000);
+  });
+})();
+</script>
+</body>
+</html>
