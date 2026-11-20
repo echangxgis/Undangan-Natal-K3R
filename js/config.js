@@ -28,7 +28,7 @@ window.INV_CONFIG = {
 
   /* ---------- Kontak panitia ---------- */
   contacts: [
-    { name: 'Nama Ketua', role: 'Ketua K3R', phone: '6281234567890' }, // EDIT
-    { name: 'Nama Sekretaris', role: 'Sekretaris', phone: '6281234567891' } // EDIT
+    { name: 'Stephen Rorimpandey', role: 'Ketua Rukun', phone: '6285244001787' },
+    { name: 'Jenny Marlen', role: 'Sekretaris', phone: '628114885052' }
   ]
 };

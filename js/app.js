@@ -251,6 +251,10 @@
       who.appendChild(strong);
       who.appendChild(small);
 
+      var number = document.createElement('small');
+      number.textContent = String(person.phone || '').replace(/^62/, '0');
+      who.appendChild(number);
+
       var link = document.createElement('a');
       link.href = 'https://wa.me/' + String(person.phone || '').replace(/\D/g, '');
       link.target = '_blank';
