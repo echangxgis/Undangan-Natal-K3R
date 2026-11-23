@@ -4,20 +4,15 @@ Ucapan Natal di halaman undangan bisa dibaca semua orang **hanya jika**
 backend Google Apps Script sudah dipasang. Tanpa backend, ucapan hanya
 tersimpan di browser masing-masing (mode pratinjau).
 
-## 1. Buat Google Sheets
-
-1. Buka https://sheets.google.com → **Blank spreadsheet**.
-2. Beri nama, misalnya `Buku Tamu Natal K3R 2026`.
-3. Salin **ID spreadsheet** dari URL:
-   `https://docs.google.com/spreadsheets/d/`**ID_INI**`/edit`
-4. (Opsional) Sheet akan dibuat otomatis oleh script dengan nama `Ucapan`.
-
-## 2. Buat Apps Script
+## 1. Buat Apps Script
 
 1. Buka https://script.google.com → **New project**.
 2. Hapus isi `Code.gs`, tempel seluruh isi file `apps-script/Code.gs`.
-3. Ganti `SPREADSHEET_ID` dengan ID dari langkah 1.
+3. (Opsional) Ubah `SPREADSHEET_NAME` jika ingin nama lain.
 4. Simpan (Ctrl+S).
+
+> Spreadsheet `Buku Tamu Natal K3R 2026` akan dibuat otomatis saat
+> ucapan pertama masuk, jadi tidak perlu membuat sheet manual.
 
 ## 3. Deploy sebagai Web app
 
