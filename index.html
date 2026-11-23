@@ -228,10 +228,16 @@
         <p class="note">Nama dan pesan akan tampil di kolom komentar. Jangan sertakan nomor telepon atau data pribadi lainnya.</p>
         <p class="note" id="wishNote" role="status"></p>
       </form>
-      <div class="wish-comments" data-reveal>
-        <h3>Komentar Natal</h3>
-        <p id="wishEmpty" role="status">Memuat ucapan?</p>
-        <ul id="wishList"></ul>
+      <div class="wish-chat" data-reveal>
+        <div class="wish-chat__head">
+          <h3>Komentar Natal</h3>
+          <span id="wishCount" class="wish-count">0 ucapan</span>
+        </div>
+        <div class="wish-chat__log" id="wishLog" aria-live="polite">
+          <p id="wishEmpty" role="status">Memuat ucapan?</p>
+          <ul id="wishList"></ul>
+        </div>
+        <button type="button" class="wish-refresh" id="wishRefresh">Muat ulang</button>
       </div>
     </div>
   </section>

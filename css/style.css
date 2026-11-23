@@ -837,62 +837,116 @@ body.locked .cover:has(.guest:not([hidden])) .cover-inner { flex-shrink: 0; }
 }
 
 /* ---------------------------------------------------------
-   Ucapan Natal (komentar)
+   Chat ucapan Natal (bisa dibaca semua pembaca)
    --------------------------------------------------------- */
-.wish-comments {
-  max-width: 420px;
+.wish-chat {
+  max-width: 520px;
   margin: 36px auto 0;
+  text-align: left;
 }
 
-.wish-comments h3 {
-  margin: 0 0 12px;
-  font-size: 1.3rem;
+.wish-chat__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.wish-chat__head h3 {
+  margin: 0;
+  font-size: 1.2rem;
   color: #F7EAC4;
-  text-align: center;
+}
+
+.wish-count {
+  font-size: .72rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: rgba(247, 242, 230, .6);
+}
+
+.wish-chat__log {
+  height: 360px;
+  max-height: 60vh;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: 14px;
+  border: 1px solid rgba(232, 206, 139, .22);
+  border-radius: 14px;
+  background: rgba(20, 4, 6, .45);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 #wishEmpty {
+  margin: auto;
   font-size: .85rem;
   text-align: center;
   color: rgba(247, 242, 230, .6);
 }
 
-#wishEmpty:empty { display: none; }
-
 #wishList {
   list-style: none;
   margin: 0;
   padding: 0;
-  display: grid;
+  display: flex;
+  flex-direction: column;
   gap: 10px;
-  max-height: 460px;
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
 }
 
-#wishList li {
-  padding: 14px 16px;
-  border: 1px solid rgba(232, 206, 139, .2);
+.wish-item {
+  padding: 10px 12px;
   border-radius: 12px;
-  background: rgba(255, 255, 255, .05);
+  background: rgba(255, 255, 255, .06);
+  border: 1px solid rgba(232, 206, 139, .14);
 }
 
-#wishList strong {
-  display: block;
+.wish-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.wish-item strong {
   font-size: .9rem;
-  font-weight: 500;
+  font-weight: 600;
   color: var(--gold-2);
   overflow-wrap: anywhere;
 }
 
-#wishList p {
-  margin: .3em 0 0;
+.wish-meta {
+  font-size: .68rem;
+  color: rgba(247, 242, 230, .5);
+  white-space: nowrap;
+}
+
+.wish-item p {
+  margin: 0;
   font-size: .92rem;
-  line-height: 1.6;
-  color: rgba(247, 242, 230, .86);
+  line-height: 1.55;
+  color: rgba(247, 242, 230, .9);
   white-space: pre-line;
   overflow-wrap: anywhere;
 }
+
+.wish-refresh {
+  margin-top: 10px;
+  width: 100%;
+  padding: 9px 12px;
+  border: 1px solid rgba(232, 206, 139, .3);
+  border-radius: 999px;
+  background: transparent;
+  color: rgba(247, 242, 230, .75);
+  font: inherit;
+  font-size: .8rem;
+  cursor: pointer;
+}
+
+.wish-refresh:hover { background: rgba(255, 255, 255, .06); }
 
 /* ---------------------------------------------------------
    Form
