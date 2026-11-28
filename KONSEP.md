@@ -2,7 +2,7 @@
 ## Ibadah Menyambut Natal Kerukunan Keluarga Kawanua (K3R) Raanan Baru 2026
 
 **Tema:** TERANG DI TENGAH KEGELAPAN (Yohanes 1:5)
-**Waktu:** Rabu, 2 Desember 2026, pukul 17.00 WIT
+**Waktu:** Rabu, 2 Desember 2026, pukul 18.00 WIT
 **Tempat:** Aula “Jantje Kemur”, SKKK Sentani
 
 ---
@@ -116,7 +116,7 @@ Paragraf tema sengaja pendek dan tidak berkhotbah:
 | Fitur | Cara kerja |
 |---|---|
 | Sampul terkunci | Halaman tidak bisa digulir sebelum tombol Buka Undangan di-tap. |
-| Hitung mundur | Menghitung ke 2 Desember 2026, pukul 17.00 WIT. Menampilkan "Ibadah sedang berlangsung" saat acara mulai. |
+| Hitung mundur | Menghitung ke 2 Desember 2026, pukul 18.00 WIT. Menampilkan "Ibadah sedang berlangsung" saat acara mulai. |
 | Simpan ke Kalender | Membuat file `.ics` berisi jadwal plus pengingat H-1. Bisa dibuka di Google Calendar, Apple Calendar, dan Outlook. |
 | Lihat Lokasi | Membuka Google Maps sesuai alamat di `config.js`. |
 | Konfirmasi via WhatsApp | Menggabungkan nama, jumlah, dan status jadi satu pesan rapi, lalu membuka WhatsApp panitia. |
@@ -139,7 +139,7 @@ Semua ada di `js/config.js`. Setelah diubah, tanggal, hitung mundur, peta, dan p
 - [ ] Cek ulang susunan acara di `index.html` (bagian `#rundown`)
 - [ ] Cek ulang dress code di bagian `#acara` dan `#info`
 
-Tanggal, jam, dan zona waktu sudah terisi: 2 Desember 2026, 17.00 WIT (`+09:00`).
+Tanggal, jam, dan zona waktu sudah terisi: 2 Desember 2026, 18.00 WIT (`+09:00`).
 Lokasi juga sudah terisi: Aula “Jantje Kemur”, SKKK Sentani, dengan tautan peta
 `https://maps.app.goo.gl/BzD4reeer5p7p7Zu8`.
 
@@ -158,7 +158,7 @@ Nomor WhatsApp ditulis dengan kode negara, tanpa `+` dan tanpa spasi. Contoh: `6
 3. Buat QR code dari tautan itu, lalu tempel di grup WhatsApp dan di pintu masuk aula.
 4. Kirim pesan pembuka yang singkat, jangan hanya menempel tautan:
 
-> Shalom, Kaka dan Adik se-K3R. Ini undangan Ibadah Menyambut Natal kita, Rabu 2 Desember 2026, pukul 17.00 WIT. Di dalamnya sudah ada lokasi, susunan acara, dan form konfirmasi kehadiran. Mohon konfirmasi paling lambat 29 November, supaya kursi dan konsumsi cukup. Tuhan Yesus memberkati.
+> Shalom, Kaka dan Adik se-K3R. Ini undangan Ibadah Menyambut Natal kita, Rabu 2 Desember 2026, pukul 18.00 WIT. Di dalamnya sudah ada lokasi, susunan acara, dan form konfirmasi kehadiran. Mohon konfirmasi paling lambat 29 November, supaya kursi dan konsumsi cukup. Tuhan Yesus memberkati.
 
 **Sebelum dibagikan, cek di HP:**
 

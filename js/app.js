@@ -9,7 +9,7 @@
 
   var C = window.INV_CONFIG || {};
   var TZ = 'Asia/Jayapura';
-  var START = new Date(C.start || '2026-12-02T17:00:00+09:00');
+  var START = new Date(C.start || '2026-12-02T18:00:00+09:00');
   var END = new Date(C.end || (START.getTime() + 3 * 60 * 60 * 1000));
 
   function $(sel, root) { return (root || document).querySelector(sel); }
